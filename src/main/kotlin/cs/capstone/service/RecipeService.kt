@@ -1,0 +1,29 @@
+package cs.capstone.service
+
+import cs.capstone.entity.Recipe
+import cs.capstone.repository.RecipeRepository
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+
+@Service
+class RecipeService(
+    private val recipeRepository: RecipeRepository,
+) {
+
+    fun getHistory(userId: String): List<Recipe> {
+        return recipeRepository.findByMember_Id(userId)
+    }
+
+    fun getRecieptById(recipeId: Long): Recipe {
+        val findById = recipeRepository.findById(recipeId)
+        if(findById.isEmpty)
+            throw IllegalArgumentException("없는 레시피 아이디입니다.")
+
+        return findById.get()
+    }
+
+    @Transactional
+    fun delete(recieptId: Long) {
+        recipeRepository.deleteById(recieptId)
+    }
+}
