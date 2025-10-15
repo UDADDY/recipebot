@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/recipes")
+@RequestMapping("/api/recipes")
 class RecipeController(
     private val recipeService: RecipeService,
 ) {

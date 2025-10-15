@@ -1,7 +1,5 @@
 package cs.capstone.controller
 
-import cs.capstone.entity.Member
-import cs.capstone.repository.MemberRepository
 import cs.capstone.service.MemberService
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseCookie
@@ -12,29 +10,38 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 class AuthController(
     private val memberService: MemberService,
 ) {
 
-    data class LoginRequest(val userId: String)
+    data class LoginRequest(val memberId: String)
+    data class LoginSuccessResponse(
+        val success: Boolean,
+        val message: String,
+    )
 
     @PostMapping("/login")
-    fun login(@RequestBody req: LoginRequest): ResponseEntity<Unit> {
-        val memberId = req.userId
+    fun login(@RequestBody req: LoginRequest): ResponseEntity<LoginSuccessResponse> {
+        val memberId = req.memberId
 
         // 회원가입
         memberService.회원가입(memberId)
 
         // 아무 플래그 없이, path=/ 만 설정
-        val cookie = ResponseCookie.from("sid", memberId)
+        val cookie = ResponseCookie.from("user-id", memberId)
             .path("/")
             .build()
 
+        val body = LoginSuccessResponse(
+            success = true,
+            message = "로그인 성공",
+        )
 
-        return ResponseEntity.noContent()
+
+        return ResponseEntity.ok()
             .header(HttpHeaders.SET_COOKIE, cookie.toString())
-            .build()
+            .body(body)
     }
 
 

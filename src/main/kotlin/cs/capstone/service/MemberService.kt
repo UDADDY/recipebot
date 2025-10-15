@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 class MemberService(
     private val memberRepository: MemberRepository,
 ) {
+    @Transactional
     fun 회원가입(memberId: String) {
         val member = Member(id = memberId, name = memberId)
         memberRepository.save(member)
