@@ -17,8 +17,9 @@ class Recipe(
     val id: Long? = null,
     val name: String,
 
-    @OneToMany(mappedBy = "recipe")
-    val steps: List<RecipeStep> = mutableListOf(),
+//    @OneToMany(mappedBy = "recipe")
+//    val steps: List<RecipeStep> = mutableListOf(),
+    val content: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class RecipeService(
     private val recipeRepository: RecipeRepository,
+    private val memberService: MemberService,
 ) {
 
     fun getHistory(userId: String): List<Recipe> {
@@ -25,5 +26,19 @@ class RecipeService(
     @Transactional
     fun delete(recieptId: Long) {
         recipeRepository.deleteById(recieptId)
+    }
+
+    @Transactional
+    fun saveRecipeDraft(draft: ChatBot.RecipeDraft, memberId: String) {
+        val name = draft.name
+        val content = draft.content
+        val member = memberService.getByMemberId(memberId)
+
+        val recipe = Recipe(
+            name = name,
+            content = content,
+            member = member
+        )
+        recipeRepository.save(recipe)
     }
 }

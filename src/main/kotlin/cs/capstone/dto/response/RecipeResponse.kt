@@ -6,14 +6,16 @@ import cs.capstone.entity.RecipeStep
 data class RecipeResponse(
     val id: Long,
     val name: String,
-    val steps: List<RecipeStep>,
+    val content: String,
+//    val steps: List<RecipeStep>,
 ) {
     companion object {
         fun fromEntity(recipe: Recipe): RecipeResponse {
             return RecipeResponse(
                 id = recipe.id!!,
                 name = recipe.name,
-                steps = recipe.steps
+                content = recipe.content,
+//                steps = recipe.steps
             )
         }
     }
