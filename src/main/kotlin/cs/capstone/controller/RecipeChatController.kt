@@ -1,7 +1,7 @@
 package cs.capstone.controller
 
-import cs.capstone.dto.request.ChatRequest
-import cs.capstone.service.ChatBot
+import cs.capstone.dto.request.AskRecipeRequest
+import cs.capstone.dto.response.RecipeDraft
 import cs.capstone.service.ChatService
 import cs.capstone.service.RecipeService
 import cs.capstone.util.currentUserIdOrNull
@@ -14,19 +14,16 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/chats")
-class ChatController(
+class RecipeChatController(
     private val chatService: ChatService,
     private val recipeService: RecipeService,
 ) {
 
-    /**
-     * 레시피 생성도 동일함
-     */
     @PostMapping
     fun chat(
         request: HttpServletRequest,
-        @RequestBody question: ChatRequest
-    ): ResponseEntity<ChatBot.RecipeDraft> {
+        @RequestBody question: AskRecipeRequest
+    ): ResponseEntity<RecipeDraft> {
         val memberId = request.currentUserIdOrNull()!!
 
         val draft = chatService.chat(memberId, question)

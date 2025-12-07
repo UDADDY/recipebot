@@ -1,5 +1,5 @@
 package cs.capstone.dto.request
 
-data class ChatRequest(
+data class AskRecipeRequest(
     val question: String,
 )

@@ -1,6 +1,7 @@
 package cs.capstone.service
 
-import cs.capstone.dto.request.ChatRequest
+import cs.capstone.dto.request.AskRecipeRequest
+import cs.capstone.dto.response.RecipeDraft
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -10,8 +11,7 @@ class ChatService(
     private val recipeService: RecipeService,
     private val chatbot: ChatBot,
 ) {
-    fun chat(userId: String, request: ChatRequest): ChatBot.RecipeDraft {
-        // TODO: 실제 데이터 반환하도록 변경
+    fun chat(userId: String, request: AskRecipeRequest): RecipeDraft {
         val draft = chatbot.generateRecipe(request.question)
 
         return draft
