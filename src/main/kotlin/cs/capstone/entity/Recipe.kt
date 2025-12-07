@@ -23,6 +23,9 @@ class Recipe(
     @Column(columnDefinition = "TEXT")
     val content: String,
 
+    @Column(name = "external_recipe_index")
+    val externalRecipeIndex: Int? = null,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))
     val member: Member,

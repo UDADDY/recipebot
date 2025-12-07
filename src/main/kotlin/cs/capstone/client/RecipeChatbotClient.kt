@@ -1,6 +1,8 @@
 package cs.capstone.client
 
 import cs.capstone.dto.request.AskRecipeRequest
+import cs.capstone.dto.request.LikeRecipeRequest
+import cs.capstone.dto.request.LikeRecipeResponse
 import cs.capstone.dto.response.RecipeChatbotResponse
 import cs.capstone.dto.response.RecipeDraft
 import org.springframework.cloud.openfeign.FeignClient
@@ -15,4 +17,7 @@ interface RecipeChatbotClient {
 
     @PostMapping("/api/recipes/ask")
     fun askRecipe(@RequestBody request: AskRecipeRequest): RecipeChatbotResponse
+
+    @PostMapping("/api/recipes/like")
+    fun likeRecipe(@RequestBody request: LikeRecipeRequest): LikeRecipeResponse
 }

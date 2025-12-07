@@ -39,6 +39,7 @@ class RecipeService(
         val recipe = Recipe(
             name = name,
             content = content,
+            externalRecipeIndex = draft.recipe.index,
             member = member
         )
         recipeRepository.save(recipe)
