@@ -1,5 +1,6 @@
 package cs.capstone.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.ConstraintMode
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -19,6 +20,7 @@ class Recipe(
 
 //    @OneToMany(mappedBy = "recipe")
 //    val steps: List<RecipeStep> = mutableListOf(),
+    @Column(columnDefinition = "TEXT")
     val content: String,
 
     @ManyToOne(fetch = FetchType.LAZY)

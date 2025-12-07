@@ -1,5 +1,6 @@
 package cs.capstone.service
 
+import cs.capstone.dto.response.RecipeChatbotResponse
 import cs.capstone.dto.response.RecipeDraft
 import cs.capstone.entity.Recipe
 import cs.capstone.repository.RecipeRepository
@@ -30,9 +31,9 @@ class RecipeService(
     }
 
     @Transactional
-    fun saveRecipeDraft(draft: RecipeDraft, memberId: String) {
-        val name = draft.name
-        val content = draft.content
+    fun saveRecipeDraft(draft: RecipeChatbotResponse, memberId: String) {
+        val name = draft.recipe!!.title!!
+        val content = draft.answer
         val member = memberService.getByMemberId(memberId)
 
         val recipe = Recipe(

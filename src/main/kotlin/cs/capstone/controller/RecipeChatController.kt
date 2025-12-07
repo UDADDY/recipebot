@@ -1,6 +1,7 @@
 package cs.capstone.controller
 
 import cs.capstone.dto.request.AskRecipeRequest
+import cs.capstone.dto.response.RecipeChatbotResponse
 import cs.capstone.dto.response.RecipeDraft
 import cs.capstone.service.ChatService
 import cs.capstone.service.RecipeService
@@ -23,7 +24,7 @@ class RecipeChatController(
     fun chat(
         request: HttpServletRequest,
         @RequestBody question: AskRecipeRequest
-    ): ResponseEntity<RecipeDraft> {
+    ): ResponseEntity<RecipeChatbotResponse> {
         val memberId = request.currentUserIdOrNull()!!
 
         val draft = chatService.chat(memberId, question)
