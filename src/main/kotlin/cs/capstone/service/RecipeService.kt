@@ -31,7 +31,7 @@ class RecipeService(
     }
 
     @Transactional
-    fun saveRecipeDraft(draft: RecipeChatbotResponse, memberId: String) {
+    fun saveRecipeDraft(draft: RecipeChatbotResponse, memberId: String): Recipe {
         val name = draft.recipe!!.title!!
         val content = draft.answer
         val member = memberService.getByMemberId(memberId)
@@ -43,5 +43,7 @@ class RecipeService(
             member = member
         )
         recipeRepository.save(recipe)
+
+        return recipe
     }
 }

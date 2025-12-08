@@ -19,7 +19,7 @@ data class RecipeInfo(
     val title: String?,
     val url: String?,
     val chef: String?,
-    val views: Int?,
+    val views: String?,
     val servings: String?,      // "2.0" 처럼 문자열로 옴
     @JsonProperty("cook_time")  // snake_case 매핑
     val cookTime: String?,

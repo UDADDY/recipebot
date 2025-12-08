@@ -1,6 +1,7 @@
 package cs.capstone.client
 
 import cs.capstone.dto.request.AskRecipeRequest
+import cs.capstone.dto.request.GenerateRecipeRequest
 import cs.capstone.dto.request.LikeRecipeRequest
 import cs.capstone.dto.request.LikeRecipeResponse
 import cs.capstone.dto.response.RecipeChatbotResponse
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody
 interface RecipeChatbotClient {
 
     @PostMapping("/api/recipes/ask")
-    fun askRecipe(@RequestBody request: AskRecipeRequest): RecipeChatbotResponse
+    fun askRecipe(@RequestBody request: GenerateRecipeRequest): RecipeChatbotResponse
 
     @PostMapping("/api/recipes/like")
     fun likeRecipe(@RequestBody request: LikeRecipeRequest): LikeRecipeResponse

@@ -1,5 +1,7 @@
 package cs.capstone.dto.request
 
 data class AskRecipeRequest(
-    val question: String,
+    val query: String,
+    val isVegan: Boolean,
+    val allergies: List<String>,
 )

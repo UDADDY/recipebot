@@ -22,14 +22,6 @@ class RecipeController(
     private val recipeService: RecipeService,
     private val chatBot: ChatBot,
 ) {
-    @GetMapping
-    fun getRecipeHistory(request: HttpServletRequest,): ResponseEntity<List<RecipeResponse>> {
-        val userId = request.currentUserIdOrNull()!!
-        val history: List<Recipe> = recipeService.getHistory(userId)
-        val responses = history.map { RecipeResponse(it.id!!, it.name, it.content) }
-
-        return ResponseEntity.ok(responses)
-    }
 
     @GetMapping("/{recipeId}")
     fun getRecipe(@PathVariable recipeId: Long): ResponseEntity<RecipeResponse> {
@@ -38,18 +30,5 @@ class RecipeController(
         return ResponseEntity.ok(RecipeResponse(response.id!!, response.name, response.content))
     }
 
-    @DeleteMapping("/{recipeId}")
-    fun delete(@PathVariable recipeId: Long): ResponseEntity<Unit> {
-        recipeService.delete(recipeId)
-
-        return ResponseEntity.noContent().build()
-    }
-
-    @PostMapping("/{recipeId}/like")
-    fun likeRecipe(@PathVariable recipeId: Long): ResponseEntity<Unit> {
-        chatBot.like(recipeId)
-
-        return ResponseEntity.noContent().build()
-    }
 
 }
